@@ -1,1 +1,9 @@
-这是一个netty示例程序的服务端
+这是一个netty示例程序的服务端和客户端的demo例子，使用的时候只需要将本目录下的所有文件拷贝到项目中，然后调用start()方法就可以了。
+
+文件解释:
+1、CommandDecoder.java是从socker中读入一个数据包时解包的操作，你可以再此处根据定义的包协议，从socker中读入的包中读入你想要的数据。
+2、CommandEncoder.java是在向socker中写入数据包之前做的操作，netty从应用代码处获取了需要传输的数据之后，在这里进行encode工作之后就通过socket传输了，encode操作主要是对数据包结构进行定义，例如，前四个字节代表了commandId,第五个字节代表了数据包的总长度，后面的字节是传输的主体。
+3、NetCommand.java定义了消息体的结构，您可以在这里自定义消息体结构。
+4、CommandSet.java用于注册command，每一种接口都必须注册之后才能进行使用，以保障安全性。实现了类似于router的功能。路由表中加入了cmdcode/parse/class，也就是commandid对应的handler的参数和类。
+5、NetServer.java是netty服务端的主类，里面的start()方法是核心，同时也可以算是一个比较典型的netty的demo。首先创建两个线程池，一个boss线程池一个worker线程池，boss线程池用于处理远端发来的socket连接，worker线程池用于调度handler来处理请求。然后初始化信息通道，传入netty通道为参数。在创建通道的时候绑定encode和decode的相关类。使用future的方法来绑定端口，并使用异步的方式来接收和处理相关的信息。
+6、NetClient.java是Netty的客户端，用于向服务器端发送请求。最重要的是Init函数，这个函数中定义了一个资源池，用于和远端服务器发起socket连接。
