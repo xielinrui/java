@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-mappings xmlns="http://java.sun.com/xml/ns/persistence/orm"
+        version="2.0">
+
+    <entity class="com.chaojilaji.demo.mysql.UsersEntity">
+        <table name="users" schema="sbdemo" catalog=""/>
+        <attributes>
+            <basic name="uid">
+                <column name="uid"/>
+            </basic>
+            <basic name="userphone">
+                <column name="userphone"/>
+            </basic>
+            <basic name="username">
+                <column name="username"/>
+            </basic>
+            <basic name="nickname">
+                <column name="nickname"/>
+            </basic>
+            <basic name="sex">
+                <column name="sex"/>
+            </basic>
+        </attributes>
+    </entity>
+</entity-mappings>
